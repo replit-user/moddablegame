@@ -1,0 +1,9 @@
+{
+    "name":"example mod",
+    "version":"1.0.0",
+    "description":"example mod",
+    "main":"./mods/examplemod/main.py",
+    "compatible":[
+        "alpha"
+    ]
+}
