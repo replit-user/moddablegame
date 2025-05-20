@@ -84,6 +84,8 @@ while True:
             save["owned_establishments"][establishment] -= 1
     elif choice == "save":
         with open("./save.json","w") as f:
+            save["money"] = money
+            save["month"] = month
             data = json.dumps(save)
             f.write(data)
     elif choice == "load":
