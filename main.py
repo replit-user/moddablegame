@@ -12,12 +12,14 @@ establishments = {
         {
         "cost":1000,
         "income":100,
-        "upkeep":75
+        "upkeep":50,
+        "loan":100
         },
     "restaurant":
         {"cost":5000,
                   "income":500,
-                  "upkeep":250
+                  "upkeep":200,
+                  "loan":300
                   }
     }
 
@@ -29,12 +31,13 @@ save = {
         "restaurant":
             0
         },
-    "month":0
+    "month":0,
+    "loans":[]
 }
 
 month = save["month"]
 money = save["money"]
-
+loans = save["loans"]
 
 with open("./mods.json") as f:
     mods = json.load(f)
@@ -58,7 +61,7 @@ while True:
     choices = ["buy","sell","save","load","advance","quit"]
     for choice in choices:
         print(choice)
-    choice = input(">")
+    choice = input("> ").lower()
     if choice not in choices:
         print("invalid choice")
         continue
@@ -71,6 +74,7 @@ while True:
         else:
             money -= establishments[establishment]["cost"]
             save["owned_establishments"][establishment] += 1
+            loans.append(establishments[establishment]["loan"])
             
     elif choice == "sell":
         for establishment in save["owned_establishments"]:
@@ -86,22 +90,30 @@ while True:
         with open("./save.json","w") as f:
             save["money"] = money
             save["month"] = month
-            data = json.dumps(save)
-            f.write(data)
+            data = json.dump(save,f,indent=4)
     elif choice == "load":
         with open("./save.json","r") as f:
             save = f.read()
             save = json.loads(save)
             money = save["money"]
             month = save["month"]
+            loans = save["loans"]
     elif choice == "advance":
         for establishment in save["owned_establishments"]:
             for i in range(save["owned_establishments"][establishment]):
                 money += establishments[establishment]["income"]
                 money -= establishments[establishment]["upkeep"]
                 if money <= 0:
-                    print("you lose")
-                    quit()
+                    money += 1000
+                    for i in range(10):
+                        loans.append(50)
+                    input("you got a 1000 dollar loan to get you out of debt, press enter to continue... ")
+        i = 0
+        for loan in loans:
+            money -= loan // 2
+            loans[i] = loans[i] // 2
+            i += 1
+        month += 1
     elif choice == "quit":
         quit()
     if name == "nt":
