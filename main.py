@@ -108,6 +108,9 @@ while True:
                     for i in range(10):
                         loans.append(50)
                     input("you got a 1000 dollar loan to get you out of debt, press enter to continue... ")
+        for i in range(loans.count(0)):
+            loans.remove(0)
+            
         i = 0
         for loan in loans:
             money -= loan // 2
