@@ -87,12 +87,12 @@ while True:
             money += establishments[establishment]["cost"] // 2
             save["owned_establishments"][establishment] -= 1
     elif choice == "save":
-        with open("./save.json","w") as f:
+        with open(f"./saves/{input("eenter save name: ")}.json","w") as f:
             save["money"] = money
             save["month"] = month
             data = json.dump(save,f,indent=4)
     elif choice == "load":
-        with open("./save.json","r") as f:
+        with open(f"./saves/{input("enter save name: ")}.json","r") as f:
             save = f.read()
             save = json.loads(save)
             money = save["money"]

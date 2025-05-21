@@ -4,11 +4,5 @@
         "enabled":true,
         "path":"./mods/examplemod/main.py",
         "header":"./mods/examplemod/manifest.json"
-    },
-{
-    "name":"infinitemoney",
-    "enabled":false,
-    "path":"./mods/infinitemoney/main.py",
-    "header":"./mods/infinitemoney/manifest.json"
-}]
+    }]
 }
