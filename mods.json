@@ -4,5 +4,10 @@
         "enabled":true,
         "path":"./mods/examplemod/main.py",
         "header":"./mods/examplemod/manifest.json"
+    },{
+        "name":"arcademod",
+        "enabled":true,
+        "path":"./mods/arcade/main.py",
+        "header":"./mods/arcade/manifest.json"
     }]
 }

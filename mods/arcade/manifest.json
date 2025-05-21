@@ -1,0 +1,9 @@
+{
+    "name":"arcade",
+    "version":"1.0.0",
+    "description":"adds an arcade",
+    "main":"./mods/arcade/main.py",
+    "compatible":[
+        "alpha"
+    ] 
+}

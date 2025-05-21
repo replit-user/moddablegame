@@ -26,10 +26,6 @@ establishments = {
 save = {
     "money":1000,
     "owned_establishments":{
-        "store":
-        0,
-        "restaurant":
-            0
         },
     "month":0,
     "loans":[]
@@ -73,6 +69,8 @@ while True:
             print("invalid establishment")
         else:
             money -= establishments[establishment]["cost"]
+            if not establishment in save["owned_establishments"]:
+                save["owned_establishments"][establishment] = 0
             save["owned_establishments"][establishment] += 1
             loans.append(establishments[establishment]["loan"])
             
