@@ -55,10 +55,10 @@ for mod in mods["mods"]:
 print("mods loaded")
 
 
+choices = ["buy","sell","save","load","advance","quit","loan"]
 while True:
     print("month " + str(month))
     print("money " + str(money))
-    choices = ["buy","sell","save","load","advance","quit"]
     for choice in choices:
         print(choice)
     choice = input("> ").lower()
@@ -119,6 +119,10 @@ while True:
         month += 1
     elif choice == "quit":
         quit()
+    elif choice == "loan":
+        ammount = int(input("how much money would you like to loan: "))
+        loans.append(ammount)
+        money += ammount
     if name == "nt":
         system("cls")
     else:
