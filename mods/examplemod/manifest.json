@@ -5,6 +5,7 @@
     "main":"./mods/examplemod/main.py",
     "compatible":[
         "alpha",
-        "1.0.0"
+        "1.0.0",
+        "1.0.1"
     ]
 }
