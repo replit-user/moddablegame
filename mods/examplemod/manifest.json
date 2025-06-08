@@ -4,6 +4,7 @@
     "description":"example mod",
     "main":"./mods/examplemod/main.py",
     "compatible":[
-        "alpha"
+        "alpha",
+        "1.0.0"
     ]
 }

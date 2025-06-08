@@ -4,6 +4,7 @@
     "description":"adds an arcade",
     "main":"./mods/arcade/main.py",
     "compatible":[
-        "alpha"
+        "alpha",
+        "1.0.0"
     ] 
 }

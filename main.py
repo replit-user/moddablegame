@@ -3,7 +3,7 @@ from random import randint
 from os import system, name, path,getcwd
 money = 0
 
-VERSION = "alpha"
+VERSION = "1.0.0"
 
 
 
@@ -63,7 +63,7 @@ while True:
         continue
     elif choice == "buy":
         for establishment in establishments:
-            print(establishment)
+            print(establishment,establishments[establishment]["cost"])
         establishment = input("establishment> ")
         if establishment not in establishments:
             print("invalid establishment")
@@ -85,7 +85,7 @@ while True:
             money += establishments[establishment]["cost"] // 2
             save["owned_establishments"][establishment] -= 1
     elif choice == "save":
-        with open(f"./saves/{input("eenter save name: ")}.json","w") as f:
+        with open(f"./saves/{input("enter save name: ")}.json","w") as f:
             save["money"] = money
             save["month"] = month
             data = json.dump(save,f,indent=4)
