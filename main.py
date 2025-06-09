@@ -5,8 +5,6 @@ money = 0
 
 VERSION = "1.1.0"
 
-
-
 establishments = {
     "store":
         {
@@ -127,9 +125,10 @@ while True:
         ammount = int(input("how much money would you like to loan: "))
         loans.append(ammount)
         money += ammount
+
+    for mod in code:
+        exec(mod)
     if name == "nt":
         system("cls")
     else:
         system("clear")
-    for mod in code:
-        exec(mod)
