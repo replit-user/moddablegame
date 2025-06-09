@@ -3,7 +3,7 @@ from random import randint
 from os import system, name, path,getcwd
 money = 0
 
-VERSION = "1.0.1"
+VERSION = "1.1.0"
 
 
 
@@ -39,6 +39,7 @@ with open("./mods.json") as f:
     mods = json.load(f)
 
 for mod in mods["mods"]:
+    code = []
     if mod["enabled"]:
         with open(mod["header"],"r") as f:
             header = json.load(f)
@@ -46,6 +47,8 @@ for mod in mods["mods"]:
                 continue
             else:
                 with open(header["main"],"r") as f:
+                    code.append(f.read())
+                with open(header["ready"],"r") as f:
                     exec(f.read())
 
 print("mods loaded")
@@ -128,3 +131,5 @@ while True:
         system("cls")
     else:
         system("clear")
+    for mod in code:
+        exec(mod)
