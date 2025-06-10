@@ -1,6 +1,15 @@
 import json
 from random import randint
-from os import system, name, path,getcwd
+from os import system, name, path
+from cryptography.fernet import Fernet as fernet
+if not path.exists("./key"):
+    with open("./key","xb") as f:
+        f.write(fernet.generate_key())
+
+with open("./key") as f:key = f.read()
+
+key = fernet(key)
+
 money = 0
 
 VERSION = "1.1.0"
@@ -26,7 +35,7 @@ save = {
     "owned_establishments":{
         },
     "month":0,
-    "loans":[]
+    "loans":[1000]
 }
 
 month = save["month"]
@@ -86,14 +95,16 @@ while True:
             money += establishments[establishment]["cost"] // 2
             save["owned_establishments"][establishment] -= 1
     elif choice == "save":
-        with open(f"./saves/{input("enter save name: ")}.json","w") as f:
+        with open(f"./saves/{input("enter save name: ")}.save","wb") as f:
             save["money"] = money
             save["month"] = month
-            data = json.dump(save,f,indent=4)
+            data = json.dumps(save,indent=4)
+            f.write(fernet.encrypt(key,data.encode()))
     elif choice == "load":
-        with open(f"./saves/{input("enter save name: ")}.json","r") as f:
+        with open(f"./saves/{input("enter save name: ")}.save","r") as f:
             save = f.read()
-            save = json.loads(save)
+            save = fernet.decrypt(key,save)
+            save = json.loads(save.decode())
             money = save["money"]
             month = save["month"]
             loans = save["loans"]
