@@ -45,7 +45,7 @@ loans = save["loans"]
 
 with open("./mods.json") as f:
     mods = json.load(f)
-
+choices = ["buy","sell","save","load","advance","quit","loan"]
 for mod in mods["mods"]:
     code = []
     if mod["enabled"]:
@@ -60,9 +60,6 @@ for mod in mods["mods"]:
                     exec(f.read())
 
 print("mods loaded")
-
-
-choices = ["buy","sell","save","load","advance","quit","loan"]
 while True:
     print("month " + str(month))
     print("money " + str(money))
