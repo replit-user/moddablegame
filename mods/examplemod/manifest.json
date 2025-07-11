@@ -1,10 +1,13 @@
 {
     "name":"example mod",
-    "version":"1.0.0",
+    "version":"2.0.0",
     "description":"example mod",
-    "main":"./mods/examplemod/e.py",
-    "ready":"./mods/examplemod/main.py",
+    "main":"./mods/examplemod/main.py",
+    "on_advance":"./mods/examplemod/main.py",
+    "init":"./mods/examplemod/init.py",
+    "id":"builtin-examplemod",
     "compatible":[
-        "1.1.0"
-    ]
+        "2.0.0"
+    ],
+    "incompatible":[]
 }

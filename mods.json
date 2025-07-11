@@ -1,16 +1,18 @@
 {
     "mods": [
         {
-            "name": "examplemod",
+            "name": "arcade",
+            "version": "1.0.0",
             "enabled": true,
-            "path": "./mods/examplemod/main.py",
-            "header": "./mods/examplemod/manifest.json"
+            "path": "./mods/arcade/init.py",
+            "header": "./mods/arcade/manifest.json"
         },
         {
-            "name": "arcademod",
+            "name": "example mod",
+            "version": "1.0.0",
             "enabled": true,
-            "path": "./mods/arcade/main.py",
-            "header": "./mods/arcade/manifest.json"
+            "path": "./mods/examplemod/init.py",
+            "header": "./mods/examplemod/manifest.json"
         }
     ]
 }

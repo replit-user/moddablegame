@@ -2,9 +2,12 @@
     "name":"arcade",
     "version":"1.0.0",
     "description":"adds an arcade",
-    "main":"./mods/arcade/e.py",
-    "ready":"./mods/arcade/main.py",
+    "main":"./mods/arcade/main.py",
+    "on_advance":"./mods/arcade/main.py",
+    "init":"./mods/arcade/init.py",
+    "id":"builtin-arcade",
     "compatible":[
-        "1.1.0"
-    ] 
+        "2.0.0"
+    ],
+    "incompatible":[]
 }
