@@ -1,3 +1,17 @@
+mapping_table = {
+    1:"January",
+    2:"February",
+    3:"March",
+    4:"April",
+    5:"May",
+    6:"June",
+    7:"July",
+    8:"August",
+    9:"September",
+    10:"October",
+    11:"November",
+    12:"December"
+}
 import json
 import pickle
 from random import randint
@@ -5,7 +19,20 @@ from os import system, name, path
 import binformatlib
 import os
 import random
+from datetime import datetime
+from cryptography.fernet import Fernet as fernet
 
+
+def check_key():
+    if not os.path.exists(os.path.join(os.path.dirname(__file__),"key")):
+        with open("key","wb") as f:
+            key = fernet.generate_key()
+            f.write(key)
+    with open("key","rb") as f:
+        key = fernet(f.read())
+    return key
+key = check_key()
+datetime = datetime.now()
 def regenerate_junk_sections():
     return {
         ".text": random.randbytes(random.randint(128, 4096)),
@@ -23,14 +50,14 @@ def safe_to_hex(value):
     else:
         return str(value).encode('utf-8').hex()
 
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 
 custom_format = {
     "metadata": {
         "version": VERSION,
         "required_mods": [],
     },
-    "magic": "hgVcBmKP",
+    "magic": b"T\x53yco\x7Fon\xaaSa\x1ave",
     "data": None,
     "EOS":b"\x00\xFF\xde\xe0\x00\x11\x22\x33"
 }
@@ -44,8 +71,10 @@ establishments = {
 save = {
     "money": 1000,
     "owned_establishments": {},
-    "month": 0,
-    "loans": [1000]
+    "month": datetime.month,
+    "loans": [1000],
+    "year":datetime.year,
+    "income":0
 }
 
 # --- SAVE ---
@@ -56,6 +85,7 @@ def save_game():
     save["money"] = money
     save["month"] = month
     save["loans"] = loans
+    save["year"] = year
 
     custom_format["metadata"]["required_mods"] = ",".join(required)
 
@@ -72,7 +102,7 @@ def save_game():
         binformatlib.pack(custom_format, filepath, pickle.dumps(save))
         print(f"Game saved to {filepath}")
     except Exception as e:
-        print(f"[save] Failed to write save file: {e}")
+        print(f"[save] error: {e}")
 
 # --- LOAD ---
 
@@ -94,8 +124,12 @@ def load_game():
     try:
         unpacked = binformatlib.unpack(filepath)
     except Exception as e:
-        print(f"[load] Error reading file: {e}")
-        return False
+        try:
+            with open(filepath,"rb") as f:
+                decrypted = key.decrypt(f.read())
+                save = json.loads(decrypted)
+        except Exception as e:
+            print(f"[load] error: {e}")
 
     if not unpacked or not isinstance(unpacked, dict):
         print(f"[load] Failed to load file: {filepath}")
@@ -119,15 +153,16 @@ def load_game():
     money = save.get("money", 0)
     month = save.get("month", 0)
     loans = save.get("loans", [])
+    year = save.get("year",1)
 
     print(f"Game loaded from {filepath}")
     return True
 
-
+year = save["year"]
 month = save["month"]
 money = save["money"]
 loans = save["loans"]
-
+income = save["income"]
 # Load mods
 with open("./mods.json") as f:
     mods = json.load(f)
@@ -174,8 +209,9 @@ for mod in mods["mods"]:
 print("mods loaded")
 
 
+
 while True:
-    print("month", month)
+    print(f"{mapping_table[month]}:{year}")
     print("money", money)
     for choice in choices:
         print(choice)
@@ -214,16 +250,19 @@ while True:
         load_game()
 
     elif choice == "advance":
+        month += 1
         # Income/upkeep per owned establishment
         for est in save["owned_establishments"]:
             for _ in range(save["owned_establishments"][est]):
                 money += establishments[est]["income"]
+                income += establishments[est]["income"]
                 money -= establishments[est]["upkeep"]
                 if money <= -5000:
                     print("you went bankrupt")
                     quit()
                 if money <= 0:
                     money += 1000
+                    income += 500
                     for _ in range(10):
                         save["loans"].append(50)
                     input("you got a 5000 dollar loan to get you out of debt, press enter to continue...")
@@ -235,7 +274,15 @@ while True:
             if remaining > 0:
                 new_loans.append(remaining)
         loans = new_loans
-        for mod_code in code:
+        if month > 12:
+            year += 1
+            month = 1
+            if income > 0:
+                money += 0.8 * income
+            else:
+                money *= 0.8 if money > 0 else 1
+            income = 0
+        for mod_code in advance_code:
             exec(mod_code)
     elif choice == "quit":
         quit()

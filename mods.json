@@ -9,7 +9,7 @@
         },
         {
             "name": "example mod",
-            "version": "1.0.0",
+            "version": "2.0.1",
             "enabled": true,
             "path": "./mods/examplemod/init.py",
             "header": "./mods/examplemod/manifest.json"
