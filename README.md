@@ -1,20 +1,25 @@
 ## PATCH NOTES
 
-change version to 2.0.4
-fixed a small bug, what was the bug?
+- 2.0.5
+    added a personal message from me to the end of readme.md(you have no idea how much I tried not to cry when writing it)
+    change version number to 2.0.5
 
-for users:
-sometimes your money was subtracted by a negative number so when yearly taxes came your money would increase
+- 2.0.4
+    change version to 2.0.4
+    fixed a small bug, what was the bug?
 
-for mod devs:
+    for users:
+    sometimes your money was multiplied by a negative number so when yearly taxes came your money would increase
 
-the variable 'income' would be negative if your gross was less than 0 due to loans or otherwise, this would result in money -= 0.8 * [SOME NEGATIVE NUMBER]
+    for mod devs:
 
-how it was fixed(devs only):
+    the variable 'income' would be negative if your gross was less than 0 due to loans or otherwise, this would result in money -= 0.8 * [SOME NEGATIVE NUMBER]
 
-added an if statement to check if income is bigger than 0, if it is leave it alone, otherwise make it 0 essentially 'clamping' the minimum to 0
+    how it was fixed(devs only):
 
-added more save obfuscation using junk keys
+    added an if statement to check if income is bigger than 0, if it is leave it alone, otherwise make it 0 essentially 'clamping' the minimum to 0
+
+    added more save obfuscation using junk keys
 
 # Tycoon Console Game
 
@@ -224,3 +229,9 @@ MIT liscense
 ---
 
 *Enjoy building your tycoon empire!*
+
+
+
+## special note
+
+this project was never meant to be even moderately big as it is, it was meant for me to learn how to implement modding into a simple game, but I added more features, heck I coded my own python module because there wasn't one that did exactly what I want, and then I extend it, fix bugs, add features that were never meant to be, I am not 100% sure but I think I started this as a school project, I've been working on it for 6 months with maybe a spur of updates one day a month, heck the moment I grasp C++ I might just port this hole project over from scratch, anyway, my point is that this project never would've gone this far(which it hasn't gone mcuh far at all but I hope it will go further) and I want you to keep in mind these things while playing this super small super simple game that doesn't even have a GUI or TUI but a CLI(trust me as someone who uses the unix terminal, cli's are not fun) 

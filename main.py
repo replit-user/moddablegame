@@ -50,7 +50,7 @@ def safe_to_hex(value):
     else:
         return str(value).encode('utf-8').hex()
 
-VERSION = "2.0.4"
+VERSION = "2.0.5"
 
 custom_format = {
     "magic": b"T\x53yco\x7Fon\xaaSa\x1ave",
