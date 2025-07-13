@@ -37,6 +37,7 @@ def regenerate_junk_sections():
         ".text": random.randbytes(random.randint(128, 4096)),
         ".bss": random.randbytes(random.randint(64, 1024)),
         ".mem": random.randbytes(random.randint(64, 1024)),
+        "jHgtw":random.randbytes(random.randint(64, 2048))
     }
 with open("settings.json","r") as f:
     settings = json.load(f)
@@ -49,14 +50,15 @@ def safe_to_hex(value):
     else:
         return str(value).encode('utf-8').hex()
 
-VERSION = "2.0.3"
+VERSION = "2.0.4"
 
 custom_format = {
+    "magic": b"T\x53yco\x7Fon\xaaSa\x1ave",
     "metadata": {
         "version": VERSION,
         "required_mods": [],
+        "KlasBws":{"YgaNHsKJsasD":False,"KlajhsSHNUDWE":True}
     },
-    "magic": b"T\x53yco\x7Fon\xaaSa\x1ave",
     "data": None,
     "EOS":b"\x00\xFF\xde\xe0\x00\x11\x22\x33"
 }
@@ -266,6 +268,8 @@ while True:
                         save["loans"].append(50)
                     input("you got a 5000 dollar loan to get you out of debt, press enter to continue...")
         new_loans = []
+        if income > 0:
+            income = 0
         for loan in loans:
             repayment = loan // 2
             money -= repayment

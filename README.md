@@ -1,4 +1,21 @@
-```markdown
+## PATCH NOTES
+
+change version to 2.0.4
+fixed a small bug, what was the bug?
+
+for users:
+sometimes your money was multiplied by a negative number so when yearly taxes came your money would increase
+
+for mod devs:
+
+the variable 'income' would be negative if your gross was less than 0 due to loans or otherwise, this would result in money -= 0.8 * [SOME NEGATIVE NUMBER]
+
+how it was fixed(devs only):
+
+added an if statement to check if income is bigger than 0, if it is leave it alone, otherwise make it 0 essentially 'clamping' the minimum to 0
+
+added more save obfuscation using junk keys
+
 # Tycoon Console Game
 
 A simple console-based tycoon game in Python with mod support, save/load functionality, and an expandable codebase.
