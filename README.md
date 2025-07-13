@@ -4,7 +4,7 @@ change version to 2.0.4
 fixed a small bug, what was the bug?
 
 for users:
-sometimes your money was multiplied by a negative number so when yearly taxes came your money would increase
+sometimes your money was subtracted by a negative number so when yearly taxes came your money would increase
 
 for mod devs:
 
