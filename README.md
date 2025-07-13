@@ -7,6 +7,7 @@
     change version number to 2.0.5
 
 - 2.0.4
+  
     change version to 2.0.4
   
     fixed a small bug, what was the bug?
