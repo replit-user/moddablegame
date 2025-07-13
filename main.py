@@ -49,7 +49,7 @@ def safe_to_hex(value):
     else:
         return str(value).encode('utf-8').hex()
 
-VERSION = "2.0.2"
+VERSION = "2.0.3"
 
 custom_format = {
     "metadata": {
