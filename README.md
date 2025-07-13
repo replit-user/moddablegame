@@ -1,12 +1,12 @@
 ## PATCH NOTES
 
-- 2.0.5
+##### 2.0.5
   
     added a personal message from me to the end of readme.md(you have no idea how much I tried not to cry when writing it)
   
     change version number to 2.0.5
 
-- 2.0.4
+##### 2.0.4
   
     change version to 2.0.4
   
