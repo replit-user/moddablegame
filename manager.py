@@ -13,17 +13,16 @@ def mod_exists(save_data, name, version, path, header):
             return True
     return False
 
-def mod():
+def mod(selection):
     with open("./mods.json", "r") as f:
         mods = json.load(f)
-
-    print("\n=== MOD MANAGER ===")
-    for i, mod in enumerate(mods["mods"]):
-        status = "ON" if mod.get("enabled") else "OFF"
-        print(f"{i+1}. {mod['name']} [{status}]")
+    if __name__ == "__main__":
+        print("\n=== MOD MANAGER ===")
+        for i, mod in enumerate(mods["mods"]):
+            status = "ON" if mod.get("enabled") else "OFF"
+            print(f"{i+1}. {mod['name']} [{status}]")
 
     try:
-        selection = input("Enter mod number to toggle it, or 'd' to discover mods, or 0 to exit: ")
 
         if selection == "d":
             mods_path = os.path.join(os.path.dirname(__file__), "mods")
@@ -59,12 +58,13 @@ def mod():
                                 })
             with open("mods.json", "w") as f:
                 json.dump(save_data, f, indent=4)
-            print("Mods discovered and added.\n")
+            if __name__ == "__main__":
+                print("Mods discovered and added.\n")
             return
 
         # Convert selection to int for toggling mods
         selection = int(selection)
-        if selection == 0:
+        if selection == 0 and __name__ == "__main__":
             print("Exiting mod manager.")
             sys.exit(0)
 
@@ -73,12 +73,13 @@ def mod():
             selected_mod["enabled"] = not selected_mod.get("enabled", False)
             with open("./mods.json", "w") as f:
                 json.dump(mods, f, indent=4)
-            print(f"Mod '{selected_mod['name']}' is now {'ENABLED' if selected_mod['enabled'] else 'DISABLED'}.\n")
-        else:
+            if __name__ == "__main__":
+                print(f"Mod '{selected_mod['name']}' is now {'ENABLED' if selected_mod['enabled'] else 'DISABLED'}.\n")
+        elif __name__ == "__main__":
             print("Selection out of range.")
             
     except (ValueError, IndexError, TypeError):
         print("Invalid input. Please try again.")
-
-while True:
-    mod()
+if __name__ == "__main__":
+    while True:
+        mod(input("Enter mod number to toggle it, or 'd' to discover mods, or 0 to exit: "))

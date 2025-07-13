@@ -12,16 +12,15 @@ mapping_table = {
     11:"November",
     12:"December"
 }
+import manager
 import json
 import pickle
-from random import randint
-from os import system, name, path
 import binformatlib
 import os
 import random
 from datetime import datetime
 from cryptography.fernet import Fernet as fernet
-
+manager.mod("d")
 
 def check_key():
     if not os.path.exists(os.path.join(os.path.dirname(__file__),"key")):
@@ -50,7 +49,7 @@ def safe_to_hex(value):
     else:
         return str(value).encode('utf-8').hex()
 
-VERSION = "2.0.1"
+VERSION = "2.0.2"
 
 custom_format = {
     "metadata": {
@@ -293,6 +292,8 @@ while True:
             money += amount
         else:
             print("loan too big")
+    for mod_code in code:
+        exec(mod_code)
     if clear and os.name == "nt":
         os.system("cls")
     elif clear:
