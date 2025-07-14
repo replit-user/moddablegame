@@ -46,7 +46,7 @@ A simple console-based tycoon game in Python with mod support, save/load functio
 ## Installation
 
 1. Make sure you have Python 3.8 or higher installed.  
-2. Clone or download this repository.  
+2. Clone or download this repository, or in realeses download the install script for your platform and run the script with the instilation path as the first argument
 3. Install required dependencies with:
 
 ```bash
