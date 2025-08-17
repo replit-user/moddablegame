@@ -229,7 +229,7 @@ submit pull requests but I'm one person with a strict schedule so I might not re
 
 ## License
 
-MIT liscense
+this software is licensed under version 1.0 of the responsible sharing license
 
 ---
 
