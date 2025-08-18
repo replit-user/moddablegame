@@ -50,7 +50,7 @@ def safe_to_hex(value):
     else:
         return str(value).encode('utf-8').hex()
 
-VERSION = "2.0.5"
+VERSION = "2.1.0"
 
 custom_format = {
     "magic": b"T\x53yco\x7Fon\xaaSa\x1ave",
@@ -104,6 +104,7 @@ def save_game():
         print(f"Game saved to {filepath}")
     except Exception as e:
         print(f"[save] error: {e}")
+        exit(1)
 
 # --- LOAD ---
 
@@ -112,7 +113,7 @@ def load_game():
     filename = input("enter save name: ").strip()
     if not filename:
         print("Invalid filename")
-        return False
+        exit(1)
 
     if not filename.endswith(".save"):
         filename += ".save"
@@ -121,7 +122,7 @@ def load_game():
 
     if not os.path.exists(filepath):
         print(f"[load] File does not exist: {filepath}")
-        return False
+        exit(1)
     try:
         unpacked = binformatlib.unpack(filepath)
     except Exception as e:
@@ -134,20 +135,24 @@ def load_game():
 
     if not unpacked or not isinstance(unpacked, dict):
         print(f"[load] Failed to load file: {filepath}")
-        return False
+        exit(1)
+    if not VERSION == unpacked["metadata"]["version"]:
+        print(f"[load] Incompatible save: {filepath}")
+        exit(1)
+
     save_required_bytes = unpacked.get("metadata", {}).get("required_mods", b"")
     save_required_str = save_required_bytes.decode("utf-8") if isinstance(save_required_bytes, bytes) else save_required_bytes
     save_required = save_required_str.split(",") if save_required_str else []
 
     if not all(mod in required for mod in save_required):
         print("Missing required mods, cannot load save.")
-        return False
+        exit(1)
 
     try:
         loaded_save = pickle.loads(unpacked["data"])
     except Exception as e:
         print(f"[load] Failed to unpickle save data: {e}")
-        return False
+        exit(1)
 
     save.clear()
     save.update(loaded_save)
@@ -212,8 +217,9 @@ print("mods loaded")
 
 
 while True:
-    print(f"{mapping_table[month]}:{year}")
+    print(f"{mapping_table[month]} {year}")
     print("money", money)
+
     for choice in choices:
         print(choice)
     choice = input("> ").lower()

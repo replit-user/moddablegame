@@ -3,7 +3,7 @@
     "version":"2.0.0",
     "description":"example mod",
     "main":"./mods/examplemod/main.py",
-    "on_advance":"./mods/examplemod/main.py",
+    "on_advance":"./mods/examplemod/advance.py",
     "init":"./mods/examplemod/init.py",
     "id":"builtin-examplemod",
     "compatible":[
@@ -12,7 +12,8 @@
         "2.0.2",
         "2.0.3",
         "2.0.4",
-        "2.0.5"
+        "2.0.5",
+        "2.1.0"
     ],
     "incompatible":[]
 }

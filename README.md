@@ -1,5 +1,13 @@
 ## PATCH NOTES
 
+
+##### 2.1.0
+-   changed version number to 2.1.0
+-   made it so on any error exits the program
+-   made it so when loading a save it checks if the version is the same and if not it exits the program
+-   made it so it displays month name space year instead of month:year
+
+
 ##### 2.0.5
   
 -    added a personal message from me to the end of readme.md(you have no idea how much I tried not to cry when writing it)
