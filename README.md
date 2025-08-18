@@ -217,14 +217,10 @@ The game will only load mods marked as enabled.
 ---
 
 ## Development & Future Plans
-
--   Improve gameplay mechanics and balance
     
 -   Enhance modding documentation
     
 -   Add more establishments and features
-    
--   Polish user interface and error handling
     
 
 ---
