@@ -170,47 +170,40 @@ money = save["money"]
 loans = save["loans"]
 income = save["income"]
 # Load mods
-with open("./mods.json") as f:
-    mods = json.load(f)
-
+import glob
 choices = ["buy", "sell", "save", "load", "advance", "quit", "loan"]
 code = []
 advance_code = []
 dont_load = []
 required = []
 
-for mod in mods["mods"]:
-    if mod["enabled"]:
-        if mod["name"] in dont_load:  # placeholder, dangerous because load order matters
-            continue
+mod_files = glob.glob("./mods/*/*.mod")
+for mod_file in mod_files:
+    with open(mod_file, "rb") as f:
+        header = pickle.load(f)
 
-        with open(mod["header"], "r") as f:
-            header = json.load(f)
+    if header["name"] in dont_load:  # placeholder, dangerous because load order matters
+        continue
 
-        # Check incompatibilities
-        incompatible_found = False
-        for mod_check in mods["mods"]:
-            with open(mod_check["header"], "r") as f_check:
-                mod_check_header = json.load(f_check)
-                if header["id"] in mod_check_header.get("incompatible", []):
-                    dont_load.append(mod_check_header["name"])
-                    incompatible_found = True
-        if incompatible_found:
-            continue
+    # Check incompatibilities
+    incompatible_found = False
+    for check_file in mod_files:
+        with open(check_file, "rb") as f_check:
+            mod_check_header = pickle.load(f_check)
+            if header["id"] in mod_check_header.get("incompatible", []):
+                dont_load.append(mod_check_header["name"])
+                incompatible_found = True
+    if incompatible_found:
+        continue
 
-        if VERSION not in header.get("compatible", []):
-            continue
+    if VERSION not in header.get("compatible", []):
+        continue
 
-        with open(header["main"], "r") as f:
-            code.append(f.read())
+    code.append(header["main"])
+    exec(header["init"])
+    advance_code.append(header["on_advance"])
 
-        with open(header["init"], "r") as f:
-            exec(f.read())
-
-        with open(header["on_advance"], "r") as f:  # Fixed the syntax error here
-            advance_code.append(f.read())
-
-        required.append(header["name"])
+    required.append(header["name"])
 
 print("mods loaded")
 

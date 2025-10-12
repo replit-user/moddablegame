@@ -5,14 +5,14 @@
             "version": "1.0.0",
             "enabled": true,
             "path": "./mods/arcade/init.py",
-            "header": "./mods/arcade/manifest.json"
+            "header": "./mods/arcade/arcade.mod"
         },
         {
             "name": "example mod",
-            "version": "2.0.1",
+            "version": "2.0.0",
             "enabled": true,
             "path": "./mods/examplemod/init.py",
-            "header": "./mods/examplemod/manifest.json"
+            "header": "./mods/examplemod/examplemod.mod"
         }
     ]
 }
