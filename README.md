@@ -1,5 +1,7 @@
 ## PATCH NOTES
 
+##### 2.3.0
+-  binary mod format update
 
 ##### 2.1.0
 -   changed version number to 2.1.0
